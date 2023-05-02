@@ -1,2 +1,2 @@
 # testing-kafka
-Testing Apache Kafka 
+A simple Proof of concept to demo Apache kafka 
