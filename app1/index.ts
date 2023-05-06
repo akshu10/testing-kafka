@@ -1,42 +1,9 @@
-import kafka from "kafka-node";
-import * as dotenv from "dotenv";
+import KafkaClient from "../kafka/client";
 
-import LocalProducer from "./producer";
+const main = (async () => {
+  const kafkaClient = new KafkaClient();
 
-dotenv.config({ path: "../.env" });
+  await kafkaClient.initProducer();
 
-const topics = process.env.TOPICS?.split(",") || [];
-
-console.log("TOPICS:: ", topics);
-
-const kafkaClient = new kafka.KafkaClient({
-  kafkaHost: "localhost:9092",
-});
-
-const producer = new LocalProducer(kafkaClient);
-
-producer.on("ready", () => {
-  console.log("Producer is ready");
-
-  producer.createTopics(topics);
-
-  const sendMessageRequest = [
-    {
-      topic: "Test",
-      messages: "Hello World",
-      key: "key1",
-      partition: 0,
-    },
-  ];
-
-  producer.send(sendMessageRequest, (error, result) => {
-    if (error) {
-      console.error("Producer Error", error);
-    }
-    console.log("Producer Result", result);
-  });
-
-  producer.on("error", (error: any) => {
-    console.error("Producer Error", error);
-  });
-});
+  kafkaClient.sendMessages("test", ["test message"]);
+})();

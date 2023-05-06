@@ -1,18 +1,11 @@
-import kafka from "kafka-node";
-import * as dotenv from "dotenv";
+import KafkaClient from "../kafka/client";
 
-import LocalConsumer from "./consumer";
+const main = (async () => {
+  const kafkaClient = new KafkaClient();
 
-dotenv.config({ path: "../.env" });
+  await kafkaClient.initConsumer();
 
-const topics = process.env.TOPICS?.split(",") || [];
+  kafkaClient.subscribe();
 
-console.log("TOPICS:: ", topics);
-
-console.log("Starting consumer");
-
-const kafkaClient = new kafka.KafkaClient({
-  kafkaHost: "localhost:9092",
-});
-
-const consuemer = new LocalConsumer(kafkaClient);
+  await kafkaClient.consume();
+})();

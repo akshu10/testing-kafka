@@ -12,6 +12,6 @@ services:
       KAFKA_ADVERTISED_HOST_NAME: localhost
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181  #using container name
     volumes: 
-      - ./data/kafka:/var/run/docker.sock
+      - ./data:/var/run/docker.sock
     depends_on: 
       - zookeeper

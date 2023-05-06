@@ -1,0 +1,23 @@
+{
+  "name": "kafka-nodejs",
+  "version": "1.0.0",
+  "description": "A monorepo to demo Kafka with NodeJS",
+  "private": true,
+  "workspaces": [
+    "app1/*",
+    "app2/*",
+    "kafka/*"
+  ],
+  "scripts": {
+    "build": "tsc --build --verbose"
+  },
+  "devDependencies": {
+    "@types/node": "^18.16.3",
+    "typescript": "^5.0.4",
+    "ts-node-dev": "^2.0.0"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "kafkajs": "^2.2.4"
+  }
+}
